@@ -8,6 +8,7 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
+import Icon from '@/components/effects/Icon';
 
 /* ───────────────────────────────────────────── */
 /* Animated Counter                              */
@@ -75,7 +76,7 @@ interface MetricData {
 
 const metrics: MetricData[] = [
   {
-    icon: '🏔️',
+    icon: 'mountain',
     value: 73,
     suffix: '%',
     label: 'Landfill Waste Diverted',
@@ -83,7 +84,7 @@ const metrics: MetricData[] = [
     color: '#00FF88',
   },
   {
-    icon: '🌍',
+    icon: 'globe',
     value: 2.4,
     suffix: 'M',
     label: 'Tonnes CO₂ Saved Annually',
@@ -92,7 +93,7 @@ const metrics: MetricData[] = [
     decimals: 1,
   },
   {
-    icon: '♻️',
+    icon: 'recycle',
     value: 340,
     suffix: '%',
     label: 'Increase in Recycling Efficiency',
@@ -100,7 +101,7 @@ const metrics: MetricData[] = [
     color: '#00A8FF',
   },
   {
-    icon: '⚡',
+    icon: 'bolt',
     value: 890,
     suffix: 'GWh',
     label: 'Clean Energy Generated',
@@ -157,7 +158,9 @@ function MetricCard({ metric }: { metric: MetricData }) {
 
       {/* icon with glow */}
       <div className="relative mb-6 inline-block">
-        <span className="text-4xl relative z-10">{metric.icon}</span>
+        <span className="relative z-10" style={{ color: metric.color }}>
+          <Icon name={metric.icon} size={34} />
+        </span>
         <div
           className="absolute inset-0 -m-3 rounded-full blur-xl opacity-30"
           style={{ background: metric.color }}

@@ -75,6 +75,30 @@ const PATHS: Record<string, React.ReactNode> = {
     </>
   ),
   mountain: <path d="m3 20 6-11 4 6 2-3 6 8Z" />,
+  bottle: (
+    <>
+      <path d="M10 2h4v3l1 2v13a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V7l1-2Z" />
+      <path d="M9 11h6" />
+    </>
+  ),
+  gear: (
+    <>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" />
+    </>
+  ),
+  document: (
+    <>
+      <path d="M6 2h8l4 4v16H6Z" />
+      <path d="M14 2v4h4M9 13h6M9 17h6" />
+    </>
+  ),
+  laptop: (
+    <>
+      <rect x="4" y="5" width="16" height="11" rx="1" />
+      <path d="M2 20h20" />
+    </>
+  ),
   gauge: (
     <>
       <path d="M12 14 16 9" />

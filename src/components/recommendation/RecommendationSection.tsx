@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Icon from '@/components/effects/Icon';
 
 /* ─── Types ─────────────────────────────────────────── */
 
@@ -26,11 +27,11 @@ interface AIResult {
 /* ─── Data ──────────────────────────────────────────── */
 
 const wasteTypes: WasteType[] = [
-  { key: 'plastic', label: 'Plastic', icon: '🧴', color: '#FF6B6B' },
-  { key: 'metal', label: 'Metal', icon: '⚙️', color: '#FFD93D' },
-  { key: 'paper', label: 'Paper', icon: '📄', color: '#95E1D3' },
-  { key: 'ewaste', label: 'E-Waste', icon: '💻', color: '#C084FC' },
-  { key: 'organic', label: 'Organic', icon: '🌿', color: '#00FF88' },
+  { key: 'plastic', label: 'Plastic', icon: 'bottle', color: '#FF6B6B' },
+  { key: 'metal', label: 'Metal', icon: 'gear', color: '#FFD93D' },
+  { key: 'paper', label: 'Paper', icon: 'document', color: '#95E1D3' },
+  { key: 'ewaste', label: 'E-Waste', icon: 'laptop', color: '#00A8FF' },
+  { key: 'organic', label: 'Organic', icon: 'leaf', color: '#00FF88' },
 ];
 
 const aiResults: Record<string, AIResult> = {
@@ -420,7 +421,7 @@ function ResultsPanel({ data, color }: { data: AIResult; color: string }) {
   );
 }
 
-/* ─── Main Component ────────────────────────────────── */
+/* ─── Main Component ────────────────────────��───────── */
 
 export default function RecommendationSection() {
   const [selectedWaste, setSelectedWaste] = useState<string | null>(null);
@@ -520,7 +521,12 @@ export default function RecommendationSection() {
                 animate={isSelected ? { scale: 1.05 } : { scale: 1 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
-                <span className="text-3xl block mb-2">{wt.icon}</span>
+                <span
+                  className="mb-2 flex justify-center"
+                  style={{ color: wt.color }}
+                >
+                  <Icon name={wt.icon} size={28} />
+                </span>
                 <span className="text-sm font-medium text-[#E8F4F0]">{wt.label}</span>
                 {/* Glow dot indicator */}
                 {isSelected && (
@@ -579,7 +585,9 @@ export default function RecommendationSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <div className="text-5xl mb-4">♻️</div>
+            <div className="mb-4 flex justify-center text-[#00FF88] opacity-60">
+              <Icon name="recycle" size={48} />
+            </div>
             <p className="text-lg">Select a waste type above to see AI recommendations</p>
           </motion.div>
         )}

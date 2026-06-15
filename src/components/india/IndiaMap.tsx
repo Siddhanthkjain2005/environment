@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Icon from '@/components/effects/Icon';
 
 /* ─── Types ─────────────────────────────────────────── */
 
@@ -44,10 +45,10 @@ const connections: Connection[] = [
 ];
 
 const summaryStats = [
-  { label: 'Cities Connected', value: '8', icon: '🏙️' },
-  { label: 'Daily Waste Processed', value: '68,600 TPD', icon: '♻️' },
-  { label: 'Average Efficiency', value: '93.4%', icon: '⚡' },
-  { label: 'CO₂ Saved Daily', value: '12,400 tonnes', icon: '🌱' },
+  { label: 'Cities Connected', value: '8', icon: 'building' },
+  { label: 'Daily Waste Processed', value: '68,600 TPD', icon: 'recycle' },
+  { label: 'Average Efficiency', value: '93.4%', icon: 'bolt' },
+  { label: 'CO₂ Saved Daily', value: '12,400 tonnes', icon: 'leaf' },
 ];
 
 /* ─── India Outline SVG Path ────────────────────────── */
@@ -556,7 +557,9 @@ export default function IndiaMap() {
                 }}
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-2xl">{stat.icon}</span>
+                  <span className="text-[#00FF88]">
+                    <Icon name={stat.icon} size={24} />
+                  </span>
                   <div>
                     <p className="text-xs text-[#7A9E9F] uppercase tracking-wider font-medium">
                       {stat.label}
