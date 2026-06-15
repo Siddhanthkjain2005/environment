@@ -48,9 +48,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} bg-background antialiased`}
     >
-      <body className="min-h-screen noise-overlay">{children}</body>
+      <body className="min-h-screen">{children}</body>
     </html>
   );
 }

@@ -2,20 +2,8 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import dynamic from 'next/dynamic';
-
-/* Dynamically import the R3F component to avoid SSR issues */
-const NeuralSphere = dynamic(() => import('./NeuralSphere'), {
-  ssr: false,
-  loading: () => (
-    <div className="flex h-[500px] w-full items-center justify-center md:h-[600px]">
-      <div
-        className="h-16 w-16 rounded-full border-2 border-[rgba(0,255,136,0.2)] border-t-[#00FF88]"
-        style={{ animation: 'spin 1s linear infinite' }}
-      />
-    </div>
-  ),
-});
+import NeuralCore from './NeuralCore';
+import Icon from '@/components/effects/Icon';
 
 /* ─── Card Data ──────────────────────────────────────────────── */
 
@@ -28,25 +16,25 @@ interface Capability {
 
 const CAPABILITIES: Capability[] = [
   {
-    icon: '🧠',
+    icon: 'brain',
     title: 'AI Prediction',
     description: 'Forecasting waste patterns with 97.3% accuracy',
     accent: '#00FF88',
   },
   {
-    icon: '👁',
+    icon: 'eye',
     title: 'AI Classification',
     description: 'Real-time waste stream identification and sorting',
     accent: '#00E5FF',
   },
   {
-    icon: '🔗',
+    icon: 'link',
     title: 'AI Matching',
     description: 'Connecting waste sources to optimal recycling paths',
     accent: '#00FF88',
   },
   {
-    icon: '🗺',
+    icon: 'map',
     title: 'Route Optimization',
     description: 'Minimizing transport emissions with smart logistics',
     accent: '#00E5FF',
@@ -88,8 +76,11 @@ function CapabilityCard({
       />
 
       {/* Icon */}
-      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(0,255,136,0.06)] text-2xl">
-        {capability.icon}
+      <div
+        className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(0,255,136,0.06)]"
+        style={{ color: capability.accent }}
+      >
+        <Icon name={capability.icon} size={22} />
       </div>
 
       {/* Title */}
@@ -151,21 +142,9 @@ export default function AIBrainSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-          className="relative mx-auto mb-16 max-w-3xl md:mb-20"
+          className="relative mx-auto mb-16 flex max-w-3xl justify-center md:mb-20"
         >
-          {/* Glow behind sphere */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              width: '500px',
-              height: '500px',
-              borderRadius: '50%',
-              background:
-                'radial-gradient(circle, rgba(0,255,136,0.08) 0%, rgba(0,229,255,0.04) 40%, transparent 70%)',
-              filter: 'blur(40px)',
-            }}
-          />
-          <NeuralSphere />
+          <NeuralCore />
         </motion.div>
 
         {/* ── Capability Cards ───────────────────────────────── */}

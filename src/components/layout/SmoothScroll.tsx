@@ -3,10 +3,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface SmoothScrollProps {
   children: ReactNode;
@@ -16,8 +12,14 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Respect users who prefer reduced motion — skip smooth scrolling entirely
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -27,21 +29,15 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     lenisRef.current = lenis;
 
-    // Connect Lenis scroll updates to GSAP ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
-
-    // Sync Lenis with GSAP's internal ticker for frame-perfect animation
-    const tickerCallback = (time: number) => {
-      lenis.raf(time * 1000);
+    let rafId = 0;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
     };
-
-    gsap.ticker.add(tickerCallback);
-
-    // Disable GSAP's built-in lag smoothing so Lenis stays in control
-    gsap.ticker.lagSmoothing(0);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
-      gsap.ticker.remove(tickerCallback);
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
     };

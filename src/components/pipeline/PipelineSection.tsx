@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import Icon from '@/components/effects/Icon';
 
 /* ────────────────────────────────────────────────
    Data
@@ -13,17 +14,17 @@ interface PipelineNode {
 }
 
 const sources: PipelineNode[] = [
-  { icon: '🏠', label: 'Households' },
-  { icon: '🏭', label: 'Factories' },
-  { icon: '🏢', label: 'Commercial' },
-  { icon: '🗑️', label: 'Landfills' },
+  { icon: 'home', label: 'Households' },
+  { icon: 'factory', label: 'Factories' },
+  { icon: 'building', label: 'Commercial' },
+  { icon: 'trash', label: 'Landfills' },
 ];
 
 const outputs: PipelineNode[] = [
-  { icon: '♻️', label: 'Recycling Plants' },
-  { icon: '🌿', label: 'Green Industries' },
-  { icon: '⚡', label: 'Renewable Energy' },
-  { icon: '🔧', label: 'Smart Manufacturing' },
+  { icon: 'recycle', label: 'Recycling Plants' },
+  { icon: 'leaf', label: 'Green Industries' },
+  { icon: 'bolt', label: 'Renewable Energy' },
+  { icon: 'wrench', label: 'Smart Manufacturing' },
 ];
 
 /* ────────────────────────────────────────────────
@@ -148,9 +149,9 @@ function SourceNode({ node, index }: { node: PipelineNode; index: number }) {
       }}
       transition={{ duration: 0.3 }}
     >
-      <span className="text-2xl" role="img" aria-label={node.label}>
-        {node.icon}
-      </span>
+              <span className="text-[#00FF88]" role="img" aria-label={node.label}>
+                <Icon name={node.icon} size={22} />
+              </span>
       <span className="text-sm font-medium text-[#E8F4F0]">{node.label}</span>
     </motion.div>
   );
@@ -173,9 +174,9 @@ function OutputNode({ node, index }: { node: PipelineNode; index: number }) {
       }}
       transition={{ duration: 0.3 }}
     >
-      <span className="text-2xl" role="img" aria-label={node.label}>
-        {node.icon}
-      </span>
+              <span className="text-[#00FF88]" role="img" aria-label={node.label}>
+                <Icon name={node.icon} size={22} />
+              </span>
       <span className="text-sm font-medium text-[#E8F4F0]">{node.label}</span>
     </motion.div>
   );
@@ -204,8 +205,8 @@ function AIHub() {
           }}
         />
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center">
-          <span className="text-4xl">🧠</span>
+        <div className="relative z-10 flex flex-col items-center text-[#00FF88]">
+          <Icon name="brain" size={34} />
         </div>
       </div>
       <span className="text-sm font-semibold tracking-wide text-[#00E5FF]">
@@ -445,7 +446,7 @@ function MobileSVGOverlay({ isInView }: { isInView: boolean }) {
   );
 }
 
-/* ────────────────────────────────────────────────
+/* ─────────────────────────────────────────���──────
    Main Component
    ──────────────────────────────────────────────── */
 

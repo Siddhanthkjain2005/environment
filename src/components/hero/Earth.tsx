@@ -181,12 +181,12 @@ export default function Earth() {
     <group>
       {/* Earth sphere */}
       <mesh ref={earthRef} material={earthMat}>
-        <sphereGeometry args={[1.5, 64, 64]} />
+        <sphereGeometry args={[1.5, 48, 48]} />
       </mesh>
 
       {/* Atmosphere glow shell */}
       <mesh ref={atmosRef} material={atmosMat}>
-        <sphereGeometry args={[1.62, 64, 64]} />
+        <sphereGeometry args={[1.62, 48, 48]} />
       </mesh>
     </group>
   );

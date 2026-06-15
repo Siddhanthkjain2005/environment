@@ -1,18 +1,43 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Earth from '@/components/hero/Earth';
 import WasteParticles from '@/components/hero/WasteParticles';
 
 export default function EarthScene() {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // Only render frames while the hero is on screen — saves GPU/CPU on scroll
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+    if (reduced) {
+      setActive(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setActive(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-0" aria-hidden="true">
+    <div ref={wrapperRef} className="absolute inset-0 z-0" aria-hidden="true">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
-        gl={{ alpha: true, antialias: true }}
+        gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
-        dpr={[1, 2]}
+        dpr={[1, 1.5]}
+        frameloop={active ? 'always' : 'never'}
       >
         <Suspense fallback={null}>
           {/* Lighting */}

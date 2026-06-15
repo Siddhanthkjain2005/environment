@@ -4,11 +4,11 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
-  { label: "System", href: "system" },
-  { label: "AI Brain", href: "ai-brain" },
-  { label: "Pipeline", href: "pipeline" },
+  { label: "Journey", href: "story" },
+  { label: "System", href: "pipeline" },
+  { label: "AI Engine", href: "ai-brain" },
+  { label: "Network", href: "network" },
   { label: "Impact", href: "impact" },
-  { label: "Sustainability", href: "sustainability" },
 ];
 
 export default function Navbar() {
@@ -155,7 +155,7 @@ export default function Navbar() {
               <div className="flex items-center gap-3">
                 {/* Desktop CTA */}
                 <button
-                  onClick={() => scrollTo("system")}
+                  onClick={() => scrollTo("pipeline")}
                   className="hidden rounded-full px-6 py-2 text-sm font-semibold text-[#06141B] transition-all duration-300 md:block"
                   style={{
                     background:
@@ -255,7 +255,7 @@ export default function Navbar() {
                     ))}
                     <div className="mt-2 border-t border-[rgba(0,255,136,0.1)] pt-3">
                       <button
-                        onClick={() => scrollTo("system")}
+                        onClick={() => scrollTo("pipeline")}
                         className="w-full rounded-xl py-3 text-sm font-semibold text-[#06141B]"
                         style={{
                           background:

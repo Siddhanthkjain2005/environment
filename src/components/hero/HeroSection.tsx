@@ -75,6 +75,11 @@ export default function HeroSection() {
         >
           {/* Filled primary */}
           <motion.button
+            onClick={() =>
+              document
+                .getElementById('pipeline')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            }
             whileHover={{
               scale: 1.06,
               boxShadow: '0 0 30px rgba(0,255,136,0.45), 0 0 60px rgba(0,255,136,0.2)',
@@ -87,6 +92,11 @@ export default function HeroSection() {
 
           {/* Outline cyan */}
           <motion.button
+            onClick={() =>
+              document
+                .getElementById('ai-brain')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            }
             whileHover={{
               scale: 1.06,
               boxShadow: '0 0 30px rgba(0,229,255,0.4), 0 0 60px rgba(0,229,255,0.15)',

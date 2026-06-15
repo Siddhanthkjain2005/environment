@@ -4,7 +4,7 @@ import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const PARTICLE_COUNT = 500;
+const PARTICLE_COUNT = 180;
 const MIN_RADIUS = 2.5;
 const MAX_RADIUS = 4.0;
 
